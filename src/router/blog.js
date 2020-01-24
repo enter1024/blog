@@ -1,20 +1,23 @@
 const {
 		getList,
-		getDetail
+		getDetail,
+		newBlog,
+		updataBlog,
+		deleteBlog
 	} = require('../controller/blog')
 const {SuccessModel,ErrorModel} = require('../model/resModel')
 
 const handleBlog = function(req, res){
 	const method = req.method
+	const path = req.path
 	const url = req.url
-	const path = url.split('?')[0]
+	const query = req.query
 	
 	// 获取博客列表
 	if(method == "GET" && path == "/api/blog/list"){
 		const author = req.query.author || ''
 		const keyword = req.query.keyword || ''
 		const listData = getList(author, keyword)
-		console.log("获取博客列表")
 		return new SuccessModel(listData)
 	}
 	
@@ -22,29 +25,26 @@ const handleBlog = function(req, res){
 	if(method == "GET" && path == "/api/blog/detail"){
 		const id = req.query.id
 		const data = getDetail(id)
-		console.log("博客详情")
 		return new SuccessModel(data)
 	}
 	
-	// 更新博客
+	// 新建博客
 	if(method == "POST" && path == "/api/blog/new"){
-		return {
-			msg:"更新博客"
-		}
+		const newID = newBlog(req.body)
+		return new SuccessModel(newID)
 	}
 	
 	// 更新博客
 	if(method == "POST" && path == "/api/blog/update"){
-		return {
-			msg:"更新博客"
-		}
+		const updataBlogData = updataBlog(req.body)
+		return new SuccessModel(updataBlogData)
 	}
 	
 	// 删除博客
 	if(method == "POST" && path == "/api/blog/del"){
-		return {
-			msg:"删除博客"
-		}
+		const deletedId = req.query.id
+		deletedData = deleteBlog(deletedId)
+		return new SuccessModel(deletedData)
 	}
 	
 }

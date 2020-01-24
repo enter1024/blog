@@ -5,9 +5,7 @@
   "main": "bin/www.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    // 打印日志到控制台
     "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js",
-    // 日志输出到文件夹中
     "prd": "cross-env NODE_ENV=production nodemon ./bin/www.js"
   },
   "author": "lihuayan",

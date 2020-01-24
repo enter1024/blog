@@ -47,23 +47,28 @@ const serverHandle = (req, res) => {
 	// 获取query
 	req.query = querystring.parse(url.split('?')[1])
 	
+	// 通过post获取数据(成功后处理路由)
+	getPostData(req).then(function(data){
+		req.body = data
+		// 处理blog路由
+		const blogData = handleBlog(req, res)
+		if(blogData){
+			res.end(JSON.stringify(blogData))
+			return
+		}
+		// 处理用户登录时的路由
+		const userData = handleUser(req, res)
+		if(userData){
+			res.end(JSON.stringify(userData))
+			return
+		}
+		// 没有命中路由时
+		res.writeHeader(404, {'Content-type':'text/plain'})
+		res.write("404 Not Found\n")
+		res.end()
+	})
 	
-	const blogData = handleBlog(req, res)
-	if(blogData){
-		res.end(JSON.stringify(blogData))
-		return
-	}
 	
-	const userData = handleUser(req, res)
-	if(userData){
-		res.end(JSON.stringify(userData))
-		return
-	}
-	
-	// 没有命中路由时
-	res.writeHeader(404, {'Content-type':'text/plain'})
-	res.write("404 Not Found\n")
-	res.end()
 }
 
 module.exports = serverHandle
