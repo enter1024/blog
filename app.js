@@ -10,9 +10,10 @@ const querystring = require('querystring')
 const handleBlog = require('./src/router/blog')
 const handleUser = require('./src/router/user')
 
-// 发送post请求的方法
+// 使用Promise处理请求
 const getPostData = (req) => {
 	return new Promise((resolve, reject) => {
+		// 非post
 		if(req.method != 'POST'){
 			resolve({})
 			return
@@ -21,6 +22,8 @@ const getPostData = (req) => {
 			resolve({})
 			return
 		}
+
+		// post
 		let postData = '';
 		req.on('data', chunk => {
 			postData += chunk
