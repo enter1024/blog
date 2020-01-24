@@ -4,7 +4,7 @@ const {
 		newBlog,
 		updataBlog,
 		deleteBlog
-	} = require('../controller/blog')
+	} = require('../controller/blog_ctrl')
 const {SuccessModel,ErrorModel} = require('../model/resModel')
 
 const handleBlog = function(req, res){

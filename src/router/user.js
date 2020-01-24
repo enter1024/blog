@@ -1,3 +1,6 @@
+const {loginBlog} = require('../controller/user_ctrl')
+const {SuccessModel, ErrorModel} = require('../model/resModel')
+
 const handleLogin = function(req, res){
 	const method = req.method;
 	const url = req.url;
@@ -5,8 +8,11 @@ const handleLogin = function(req, res){
 	
 	// 登录接口
 	if(method == "POST" && path == "/api/user/login"){
-		return {
-			msg: "这是登录接口返回的数据"
+		const loginData = loginBlog(req.body.username, req.body.password)
+		if(loginData.loginState){
+			return new SuccessModel("登录成功")
+		}else {
+			return new ErrorModel("登录失败")
 		}
 	}
 }
