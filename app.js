@@ -53,12 +53,16 @@ const serverHandle = (req, res) => {
 	// 通过post获取数据(成功后处理路由)
 	getPostData(req).then(function(data){
 		req.body = data
+		
 		// 处理blog路由
-		const blogData = handleBlog(req, res)
-		if(blogData){
-			res.end(JSON.stringify(blogData))
+		const blogDataPromise = handleBlog(req, res)
+		if(blogDataPromise){
+			blogDataPromise.then(blogData => {
+				res.end(JSON.stringify(blogData))
+			})
 			return
 		}
+
 		// 处理用户登录时的路由
 		const userData = handleUser(req, res)
 		if(userData){

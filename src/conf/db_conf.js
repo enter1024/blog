@@ -1,5 +1,6 @@
 let MYSQL_CONF = null
 
+// process是node.js主流程的全局变量
 if(process.env.NODE_ENV === 'dev') {
     // 开发环境的数据库配置，根据实际的情况修改即可
     MYSQL_CONF ={

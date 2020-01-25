@@ -17,8 +17,9 @@ const handleBlog = function(req, res){
 	if(method == "GET" && path == "/api/blog/list"){
 		const author = req.query.author || ''
 		const keyword = req.query.keyword || ''
-		const listData = getList(author, keyword)
-		return new SuccessModel(listData)
+		return getList(author, keyword).then(function(result){
+			return new SuccessModel(result)
+		})
 	}
 	
 	// 博客详情

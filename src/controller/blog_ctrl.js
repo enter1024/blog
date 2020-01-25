@@ -1,17 +1,17 @@
+const {queryDB} = require('../db/mysql')
+
 const getList = (author, keyword) => {
-	return [{
-		id: 1,
-		title: '标题1',
-		content: '内容1',
-		createTime: 1576949691427,
-		author: 'zhangsan'
-	},{
-		id: 2,
-		title: '标题2222222',
-		content: '内容222222222222222222',
-		createTime: 1576949740621,
-		author: 'lisi'
-	}]
+	let sqlStr = `select * from blogs where 1=1 ` // 注意后面有一个空格
+	if(author) {
+		sqlStr += `and author='${author}' `
+	}
+	if(keyword) {
+		sqlStr += `and title like '%${keyword}%' `
+	}
+	sqlStr += `order by createtime desc;`
+	
+	// 返回一个Promise对象
+	return queryDB(sqlStr)
 }
 
 const getDetail = (id) => {
