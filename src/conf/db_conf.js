@@ -1,8 +1,8 @@
-let NODE_ENV_CONF = null
+let MYSQL_CONF = null
 
 if(process.env.NODE_ENV === 'dev') {
     // 开发环境的数据库配置，根据实际的情况修改即可
-    NODE_ENV_CONF ={
+    MYSQL_CONF ={
         host: "localhost",
         user: "root",
         password: "123456",
@@ -11,7 +11,7 @@ if(process.env.NODE_ENV === 'dev') {
     }
 }else if(process.env.NODE_ENV === 'production') {
     // 生产环境的数据库配置，根据实际的情况修改即可
-    NODE_ENV_CONF ={
+    MYSQL_CONF ={
         host: "localhost",
         user: "root",
         password: "123456",
@@ -20,7 +20,7 @@ if(process.env.NODE_ENV === 'dev') {
     }
 }else {
     // 默认配置
-    NODE_ENV_CONF ={
+    MYSQL_CONF ={
         host: "localhost",
         user: "root",
         password: "123456",
@@ -30,5 +30,5 @@ if(process.env.NODE_ENV === 'dev') {
 }
 
 module.exports = {
-    NODE_ENV_CONF
+    MYSQL_CONF
 }
