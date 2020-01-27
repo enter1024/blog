@@ -25,14 +25,16 @@ const handleBlog = function(req, res){
 	// 博客详情
 	if(method == "GET" && path == "/api/blog/detail"){
 		const id = req.query.id
-		const data = getDetail(id)
-		return new SuccessModel(data)
+		return getDetail(id).then(data => {
+			return new SuccessModel(data)
+		})
 	}
 	
 	// 新建博客
 	if(method == "POST" && path == "/api/blog/new"){
-		const newID = newBlog(req.body)
-		return new SuccessModel(newID)
+		return newBlog(req.body).then(data => {
+			return new SuccessModel(data)
+		})
 	}
 	
 	// 更新博客

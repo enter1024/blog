@@ -15,21 +15,21 @@ const getList = (author, keyword) => {
 }
 
 const getDetail = (id) => {
-	// 返回id对应的数据
-	console.log("id：", id)
-	return {
-		id: 2,
-		title: '通过id获取的数据',
-		content: '内容222222222222222222',
-		createTime: 1576949740621,
-		author: 'lisi'
+	let sqlStr = `select * from blogs where 1=1 `
+	if(id) {
+		sqlStr += `and id=${id}`
 	}
+	return queryDB(sqlStr)
 }
 
 const newBlog = (data = {}) => {
-	return {
-		id: 3
-	}
+	let title = data.title
+	let content = data.content
+	let createtime = Date.now()
+	let author = data.author || '吴笑笑'
+
+	let sqlStr = `insert into blogs (title,content,createtime,author) values ('${title}','${content}',${createtime},'${author}');`
+	return queryDB(sqlStr)
 }
 
 const updataBlog = (data = {}) => {
