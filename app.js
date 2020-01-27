@@ -64,11 +64,14 @@ const serverHandle = (req, res) => {
 		}
 
 		// 处理用户登录时的路由
-		const userData = handleUser(req, res)
-		if(userData){
-			res.end(JSON.stringify(userData))
+		const userDataPromise = handleUser(req, res)
+		if(userDataPromise){
+			userDataPromise.then(data => {
+				res.end(JSON.stringify(data))
+			})
 			return
 		}
+
 		// 没有命中路由时
 		res.writeHeader(404, {'Content-type':'text/plain'})
 		res.write("404 Not Found\n")

@@ -31,4 +31,16 @@
 
 13. `delete from users where username='lisi';` 删除users表中用户名为lisi的用户。还有一种删除方式叫做软删除，通过改变state的值达到假删除的效果
 
-    ​
+   ```javascript
+   // 操作数据库时返回的对象，根据该对象判断增加，删除，更新等
+   {
+     "fieldCount": 0,
+     "affectedRows": 1, // 删除
+     "insertId": 0, // 新建
+     "serverStatus": 2,
+     "warningCount": 0,
+     "message": "",
+     "protocol41": true,
+     "changedRows": 0  // 更新
+   }
+   ```

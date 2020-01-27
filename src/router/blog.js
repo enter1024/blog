@@ -39,15 +39,16 @@ const handleBlog = function(req, res){
 	
 	// 更新博客
 	if(method == "POST" && path == "/api/blog/update"){
-		const updataBlogData = updataBlog(req.body)
-		return new SuccessModel(updataBlogData)
+		return updataBlog(req.body).then(data => {
+			return new SuccessModel(data)
+		})
 	}
 	
 	// 删除博客
 	if(method == "POST" && path == "/api/blog/del"){
-		const deletedId = req.query.id
-		deletedData = deleteBlog(deletedId)
-		return new SuccessModel(deletedData)
+		return deleteBlog(req.body).then(data => {
+			return new SuccessModel(data)
+		})
 	}
 	
 }

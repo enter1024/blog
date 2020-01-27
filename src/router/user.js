@@ -8,12 +8,13 @@ const handleLogin = function(req, res){
 	
 	// 登录接口
 	if(method == "POST" && path == "/api/user/login"){
-		const loginData = loginBlog(req.body.username, req.body.password)
-		if(loginData.loginState){
-			return new SuccessModel("登录成功")
-		}else {
-			return new ErrorModel("登录失败")
-		}
+		return loginBlog(req.body.username, req.body.password).then(data => {
+			if(data.length){
+				return new SuccessModel(data)
+			}else {
+				return new ErrorModel("用户名或密码错误")
+			}
+		})
 	}
 }
 

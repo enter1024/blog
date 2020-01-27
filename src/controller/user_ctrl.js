@@ -1,14 +1,10 @@
+const {queryDB} = require('../db/mysql')
 const loginBlog = (username, password) => {
+	let sqlStr = `select username, realname from users where username='${username}' and password='${password}';`
 
-	if(username == "zhangsan" && password == "123456"){
-		return {
-			loginState: true
-		}
-	}else {
-		return {
-			loginState: false
-		}
-	}
+	return queryDB(sqlStr).then(data => {
+		return data
+	})
 }
 
 module.exports = {

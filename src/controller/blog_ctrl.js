@@ -33,15 +33,19 @@ const newBlog = (data = {}) => {
 }
 
 const updataBlog = (data = {}) => {
-	return {
-		updata: true
-	}
+	let id = data.id
+	let title = data.title
+	let content = data.content
+
+	let sqlStr = `update blogs set title='${title}', content='${content}' where id='${id}';`
+	return queryDB(sqlStr)
 }
 
 const deleteBlog = (data = {}) => {
-	return {
-		updata: true
-	}
+	let id = data.id
+	let author = data.author || '吴笑笑'
+	let sqlStr = `delete from blogs where id='${id}' and author='${author}';`
+	return queryDB(sqlStr)
 }
 
 
